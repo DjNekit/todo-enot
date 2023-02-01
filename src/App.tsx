@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FC } from 'react'
+import { Box, CssBaseline, GlobalStyles, ThemeProvider } from '@mui/material';
+import FormGroup from '@mui/material/FormGroup';
+import SettingsIcon from '@mui/icons-material/Settings';
 
-function App() {
+import { theme, globalStyles } from '@/theme';
+import { TodayTasks } from './components/organisms';
+
+const inputGlobalStyles = <GlobalStyles styles={globalStyles}/>
+
+interface AppProps {}
+
+export const App: FC<AppProps> = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      {inputGlobalStyles}
+      <Box padding='13px 20px'>
+        <FormGroup>
+          <Box 
+            display='flex' 
+            justifyContent='space-between'
+            alignItems='center'
+            padding='0 15px'
+          >
+            <h1>To Do</h1>
+            <SettingsIcon fontSize='large' sx={{ cursor: 'pointer' }}/>
+          </Box>
+          <TodayTasks />
+        </FormGroup>
+      </Box>
+    </ThemeProvider>
+  )
 }
-
-export default App;
